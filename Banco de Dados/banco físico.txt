@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS tb_usuarios(
 CREATE TABLE IF NOT EXISTS tb_cidades(
   cod_cidade INT AUTO_INCREMENT PRIMARY KEY,
   nome_cidade VARCHAR(100) NOT NULL,
-  estado VARCHAR(2) NOT NULL
+  estado VARCHAR(2) NOT NULL,
+  CONSTRAINT tp_cidade CHECK (estado IN ('AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RR','RO','RJ','RN','RS','SC','SP','SE','TO'))
 );
-
 
 CREATE TABLE IF NOT EXISTS tb_enderecos(
   cod_endereco INT AUTO_INCREMENT PRIMARY KEY,
@@ -68,6 +68,9 @@ CREATE TABLE IF NOT EXISTS tb_pedidos(
   tipo_pagamento VARCHAR(1) DEFAULT 'D',
   ativo VARCHAR(1) DEFAULT 'S',
   fk_cod_usuario INT NOT NULL,
+  fk_cod_endereco INT NOT NULL,
+  CONSTRAINT fk_tb_pedidos_tb_enderecos
+    FOREIGN KEY (fk_cod_endereco) REFERENCES tb_enderecos (cod_endereco),
   CONSTRAINT fk_tb_pedidos_tb_usuarios
     FOREIGN KEY (fk_cod_usuario)
     REFERENCES tb_usuarios (cod_usuario),
