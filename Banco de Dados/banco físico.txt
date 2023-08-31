@@ -1,9 +1,19 @@
+DROP TABLE IF EXISTS tb_pedidos_produtos;
+DROP TABLE IF EXISTS tb_enderecos;
+DROP TABLE IF EXISTS tb_produtos;
+DROP TABLE IF EXISTS tb_pedidos;
+DROP TABLE IF EXISTS tb_usuarios;
+DROP TABLE IF EXISTS tb_cidades;
+DROP TABLE IF EXISTS tb_imagens;
+DROP TABLE IF EXISTS tb_categorias;
+
+
 CREATE TABLE IF NOT EXISTS tb_usuarios(
   cod_usuario INT AUTO_INCREMENT PRIMARY KEY,
   nome_usuario VARCHAR(100) NOT NULL,
   email_usuario VARCHAR(50) NOT NULL,
-  telefone_usuario BIGINT(11) NOT NULL,
-  cpf_usuario BIGINT(12) NOT NULL,
+  telefone_usuario BIGINT(11) ZEROFILL NOT NULL,
+  cpf_usuario BIGINT(12) ZEROFILL NOT NULL,
   senha_usuario VARCHAR(32) NOT NULL,
   tipo_cadastro VARCHAR(1) DEFAULT 'C',
   ativo VARCHAR(1) DEFAULT 'S',
@@ -29,9 +39,13 @@ CREATE TABLE IF NOT EXISTS tb_enderecos(
   fk_cod_usuario INT NOT NULL,
   fk_cod_cidade INT NOT NULL,
   CONSTRAINT fk_tb_enderecos_tb_usuarios
-    FOREIGN KEY (fk_cod_usuario) REFERENCES tb_usuarios (cod_usuario),
+    FOREIGN KEY (fk_cod_usuario) REFERENCES tb_usuarios (cod_usuario)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
   CONSTRAINT fk_tb_enderecos_tb_cidades
-    FOREIGN KEY (fk_cod_cidade) REFERENCES tb_cidades (cod_cidade),
+    FOREIGN KEY (fk_cod_cidade) REFERENCES tb_cidades (cod_cidade)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
     CONSTRAINT tp_ativo2 CHECK (ativo IN ('S','N'))
 );
 
@@ -56,7 +70,9 @@ CREATE TABLE IF NOT EXISTS tb_produtos (
   fk_cod_categoria INT NOT NULL,
   CONSTRAINT fk_tb_produtos_tb_categoria
     FOREIGN KEY (fk_cod_categoria)
-    REFERENCES tb_categorias (cod_categoria),
+    REFERENCES tb_categorias (cod_categoria)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
   CONSTRAINT tp_ativo4 CHECK (ativo IN ('S','N'))
 );
 
@@ -70,10 +86,14 @@ CREATE TABLE IF NOT EXISTS tb_pedidos(
   fk_cod_usuario INT NOT NULL,
   fk_cod_endereco INT NOT NULL,
   CONSTRAINT fk_tb_pedidos_tb_enderecos
-    FOREIGN KEY (fk_cod_endereco) REFERENCES tb_enderecos (cod_endereco),
+    FOREIGN KEY (fk_cod_endereco) REFERENCES tb_enderecos (cod_endereco)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
   CONSTRAINT fk_tb_pedidos_tb_usuarios
     FOREIGN KEY (fk_cod_usuario)
-    REFERENCES tb_usuarios (cod_usuario),
+    REFERENCES tb_usuarios (cod_usuario)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
     CONSTRAINT tp_pagamento CHECK (tipo_pagamento IN ('P','D')),
     CONSTRAINT tp_ativo5 CHECK (ativo IN ('S','N'))
 );
@@ -87,10 +107,14 @@ CREATE TABLE IF NOT EXISTS tb_pedidos_produtos(
   fk_cod_pedido INT NOT NULL,
   CONSTRAINT fk_tb_pedidos_produtos_tb_produtos
     FOREIGN KEY (fk_cod_produto)
-    REFERENCES tb_produtos (cod_produto),
+    REFERENCES tb_produtos (cod_produto)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
   CONSTRAINT fk_tb_pedidos_produtos_tb_pedidos1
     FOREIGN KEY (fk_cod_pedido)
     REFERENCES tb_pedidos (cod_pedido)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 );
 
 
@@ -101,6 +125,8 @@ CREATE TABLE IF NOT EXISTS tb_imagens(
   CONSTRAINT fk_tb_imagens_tb_produtos
     FOREIGN KEY (fk_cod_produto)
     REFERENCES tb_produtos(cod_produto)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 );
 
 
@@ -108,14 +134,13 @@ INSERT INTO tb_usuarios VALUES (1, 'Sabrina Sandri Braga', 'sabrinateste@gmail.c
 
 INSERT INTO tb_cidades VALUES (1, 'Cascavel', 'PR'), (2, 'Toledo', 'PR'), (3, 'Palotina', 'PR'), (4, 'Curitiba', 'PR'), (5, 'Foz do Iguaçu', 'PR');
 
-INSERT INTO tb_enderecos VALUES (1, 'Avenida das Torres', 85806095, 429, 'Ap:202', 'S', 4, 1), (2, 'Natalício Florentino Alves', 85811420, 519, 'Casa laranja', 'S', 1, 1), (3, 'Tenente José Joaquim Firmino', 85804150, 'Casa azul', 888, 'S', 2, 1), (4, 'Tranquilo Noro', 85807860, 720, 'Casa 203', 'S', 3, 1), (5, 'Jacarézinho', 85816010, 1466, 'Sobrado, acima de uma gráfica', 'S', 5, 1);
+INSERT INTO tb_enderecos VALUES (1, 'Avenida das Torres', 85806095, 429, 'Ap:202', 'S', 4, 1), (2, 'Natalício Florentino Alves', 85811420, 519, 'Casa laranja', 'S', 1, 1), (3, 'Tenente José Joaquim Firmino', 85804150, 888,'Casa azul', 'S', 2, 1), (4, 'Tranquilo Noro', 85807860, 720, 'Casa 203', 'S', 3, 1), (5, 'Jacarézinho', 85816010, 1466, 'Sobrado, acima de uma gráfica', 'S', 5, 1);
 
 INSERT INTO tb_categorias VALUES (1, 'Quadros', 'S'), (2, 'Moletons', 'S'), (3, 'Pins', 'S'), (4, 'Canecas', 'S'), (5, 'Chaveiros', 'S');
 
 INSERT INTO tb_produtos VALUES (1, 'Moletom estampa', 150.00, 20, 'Moletom com estampa 1', 'M', 'Preto', 'S', 2), (2, 'Quadro estampa', 50.00, 30, 'Quadro com estampa número 1', '40cm', 'Branco', 'S', 1), (3, 'Pins com estampa', 15.00, 40, 'Pins com estampa número 1', '4cm', 'Dourado', 'S', 3), (4, 'Caneca com estampa', 35.00, 50, 'Caneca com estampa número 1', '250ml', 'Branco', 'S', 4), (5, 'Chaveiro com estampa', 20.00, 60, 'Chaveiro com estampa número 1', '6cm', 'Dourado', 'S', 5);
 
-INSERT INTO tb_pedidos VALUES (1, 20.00, 'SD01BR', 'D', 'S', 1), (2, 15.00, 'SD02BR', 'P', 'S', 2), (3, 12.00, 'SD03BR', 'D', 'S', 3), (4, 9.00, 'SD04BR', 'P', 'S', 4),
-(5, 18.00, 'SD05BR', 'D', 'S', 1); 
+INSERT INTO tb_pedidos VALUES (1, 20.00, 'SD01BR', 'D', 'S', 1), (2, 15.00, 'SD02BR', 'P', 'S', 2), (3, 12.00, 'SD03BR', 'D', 'S', 3), (4, 9.00, 'SD04BR', 'P', 'S', 4), (5, 18.00, 'SD05BR', 'D', 'S', 1); 
 
 
 
