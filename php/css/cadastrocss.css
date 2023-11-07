@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Barlow', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .boas-vindas {
+    background: #ffd023;
+    background: linear-gradient(#ed735d, #ffd023);
+    padding: 40px;
+    text-align: center;
+    padding-top:20%;
+    color: #fff;
+    height: 707px;
+    width: 40%;
+    
+  }
+  
+  .form-section {
+    background-color: #ffffff;
+    padding: 0px;
+    margin-left: 60%;
+    margin-top: -600px;
+
+  }
+  
+  .form-section h2 {
+    margin-left: -15px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-items: center;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color:#ffd023;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left:90px;
+  }
+  
+  button:hover {
+    background-color: #ff3385;
+  }
+
+  nav ul {
+    list-style: none;
+    background-color: #ffffff;
+    font-size: 15px;
+    font-family: 'Barlow', sans-serif;
+    display: flex;
+  text-align:center;
+}
+
+nav li {
+    cursor: pointer;
+}
+
+nav a {
+    color: #000000;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #000000;
+}
