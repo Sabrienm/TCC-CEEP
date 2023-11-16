@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS tb_pedidos_produtos;
-DROP TABLE IF EXISTS tb_enderecos;
-DROP TABLE IF EXISTS tb_produtos;
 DROP TABLE IF EXISTS tb_pedidos;
+DROP TABLE IF EXISTS tb_imagens;
+DROP TABLE IF EXISTS tb_produtos;
+DROP TABLE IF EXISTS tb_enderecos;
 DROP TABLE IF EXISTS tb_usuarios;
 DROP TABLE IF EXISTS tb_cidades;
-DROP TABLE IF EXISTS tb_imagens;
 DROP TABLE IF EXISTS tb_categorias;
 
 
