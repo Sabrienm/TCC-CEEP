@@ -124,11 +124,11 @@ CREATE TABLE IF NOT EXISTS tb_imagens(
 
 
 INSERT INTO tb_usuarios VALUES 
-(1, 'Sabrina Sandri Braga', 'sabrinateste@gmail.com', 45999353396, 15324791903, 'sabrinateste123', 'C', 'S'), 
-(2, 'Luka Paganoti', 'lukateste@gmail.com', 45998073523, 12759755932, 'lukateste123', 'C', 'S'), 
-(3, 'Laisa Assis', 'laisateste@gmail.com', 45998476271, 12051961964, 'laisateste123', 'C', 'S'), 
-(4, 'Vitor Hugo', 'vitorteste@gmail.com', 45984137132, 12962616971, 'vitorteste123', 'C', 'S'), 
-(5, 'Lucas Santos', 'lucasteste@gmail.com', 45991170168, 10416269950, 'lucasteste123', 'C', 'S');
+(1, 'Sabrina Sandri Braga', 'sabrinateste@gmail.com', 45999353396, 15324791903, MD5('sabrinateste123'), 'A', 'S'), 
+(2, 'Luka Paganoti', 'lukateste@gmail.com', 45998073523, 12759755932, MD5('lukateste123'), 'C', 'S'), 
+(3, 'Laisa Assis', 'laisateste@gmail.com', 45998476271, 12051961964, MD5('laisateste123'), 'C', 'S'), 
+(4, 'Vitor Hugo', 'vitorteste@gmail.com', 45984137132, 12962616971, MD5('vitorteste123'), 'C', 'S'), 
+(5, 'Lucas Santos', 'lucasteste@gmail.com', 45991170168, 10416269950, MD5('lucasteste123'), 'C', 'S');
 
 INSERT INTO tb_cidades VALUES 
 (1, 'Cascavel', 'PR'), 
@@ -149,22 +149,24 @@ INSERT INTO tb_categorias VALUES
 (2, 'Moletons', 'S'), 
 (3, 'Pins', 'S'), 
 (4, 'Canecas', 'S'), 
-(5, 'Chaveiros', 'S');
+(5, 'Chaveiros', 'S'),
+(6, 'Almofadas', 'S');
 
 INSERT INTO tb_produtos VALUES 
 (1, 'Moletom estampa', 150.00, 20, 'Moletom com estampa 1', 'M', 'Preto', 'S', 2), 
 (2, 'Quadro estampa', 50.00, 30, 'Quadro com estampa número 1', '40cm', 'Branco', 'S', 1), 
 (3, 'Pins com estampa', 15.00, 40, 'Pins com estampa número 1', '4cm', 'Dourado', 'S', 3), 
 (4, 'Caneca com estampa', 35.00, 50, 'Caneca com estampa número 1', '250ml', 'Branco', 'S', 4), 
-(5, 'Chaveiro com estampa', 20.00, 60, 'Chaveiro com estampa número 1', '6cm', 'Dourado', 'S', 5);
+(5, 'Chaveiro com estampa', 20.00, 60, 'Chaveiro com estampa número 1', '6cm', 'Dourado', 'S', 5),
+(6, 'Almofada estampa', 40.00, 15, 'Almofada com estampa 1', '30cm', 'Azul', 'S', 6);
 
 -- Novos inserts
 INSERT INTO tb_usuarios VALUES 
-(6, 'Isabela Oliveira', 'isabelateste@gmail.com', 45991234567, 12345678901, 'isabelateste123', 'C', 'S'),
-(7, 'Marcos Silva', 'marcosteste@gmail.com', 45999876543, 10987654321, 'marcosteste123', 'C', 'S'),
-(8, 'Camila Santos', 'camilateste@gmail.com', 45991112233, 98765432109, 'camilateste123', 'C', 'S'),
-(9, 'Ricardo Almeida', 'ricardoteste@gmail.com', 45997778888, 10293847560, 'ricardoteste123', 'C', 'S'),
-(10, 'Amanda Lima', 'amandateste@gmail.com', 45996665555, 11223344556, 'amandateste123', 'C', 'S');
+(6, 'Isabela Oliveira', 'isabelateste@gmail.com', 45991234567, 12345678901, MD5('isabelateste123'), 'C', 'S'),
+(7, 'Marcos Silva', 'marcosteste@gmail.com', 45999876543, 10987654321, MD5('marcosteste123'), 'C', 'S'),
+(8, 'Camila Santos', 'camilateste@gmail.com', 45991112233, 98765432109, MD5('camilateste123'), 'C', 'S'),
+(9, 'Ricardo Almeida', 'ricardoteste@gmail.com', 45997778888, 10293847560, MD5('ricardoteste123'), 'C', 'S'),
+(10, 'Amanda Lima', 'amandateste@gmail.com', 45996665555, 11223344556, MD5('amandateste123'), 'C', 'S');
 
 INSERT INTO tb_cidades VALUES 
 (6, 'Maringá', 'PR'),
@@ -180,19 +182,6 @@ INSERT INTO tb_enderecos VALUES
 (9, 'Praça Central', 85833333, 1011, 'Sobrado 5', 'S', 9, 9),
 (10, 'Alameda dos Sonhos', 85844444, 1213, 'Casa 4', 'S', 10, 10);
 
-INSERT INTO tb_categorias VALUES 
-(6, 'Almofadas', 'S'),
-(7, 'Posters', 'S'),
-(8, 'Canetas', 'S'),
-(9, 'Bonés', 'S'),
-(10, 'Mousepads', 'S');
-
-INSERT INTO tb_produtos VALUES 
-(6, 'Almofada estampa', 40.00, 15, 'Almofada com estampa 1', '30cm', 'Azul', 'S', 6),
-(7, 'Poster estampa', 25.00, 25, 'Poster com estampa número 1', '50cm', 'Amarelo', 'S', 7),
-(8, 'Caneta com estampa', 8.00, 50, 'Caneta com estampa número 1', '0.7mm', 'Vermelho', 'S', 8),
-(9, 'Boné estampa', 30.00, 30, 'Boné com estampa número 1', 'Ajustável', 'Verde', 'S', 9),
-(10, 'Mousepad estampa', 15.00, 40, 'Mousepad com estampa número 1', '20cm x 20cm', 'Rosa', 'S', 10);
 
 
 
