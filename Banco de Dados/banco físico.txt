@@ -40,12 +40,10 @@ CREATE TABLE IF NOT EXISTS tb_enderecos(
   fk_cod_cidade INT NOT NULL,
   CONSTRAINT fk_tb_enderecos_tb_usuarios
     FOREIGN KEY (fk_cod_usuario) REFERENCES tb_usuarios (cod_usuario)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
+      ON DELETE CASCADE,
   CONSTRAINT fk_tb_enderecos_tb_cidades
     FOREIGN KEY (fk_cod_cidade) REFERENCES tb_cidades (cod_cidade)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
+      ON DELETE CASCADE,
     CONSTRAINT tp_ativo2 CHECK (ativo IN ('S','N'))
 );
 
@@ -71,8 +69,7 @@ CREATE TABLE IF NOT EXISTS tb_produtos (
   CONSTRAINT fk_tb_produtos_tb_categoria
     FOREIGN KEY (fk_cod_categoria)
     REFERENCES tb_categorias (cod_categoria)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
+      ON DELETE CASCADE,
   CONSTRAINT tp_ativo4 CHECK (ativo IN ('S','N'))
 );
 
@@ -92,8 +89,7 @@ CREATE TABLE IF NOT EXISTS tb_pedidos(
   CONSTRAINT fk_tb_pedidos_tb_usuarios
     FOREIGN KEY (fk_cod_usuario)
     REFERENCES tb_usuarios (cod_usuario)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
+      ON DELETE CASCADE,
     CONSTRAINT tp_pagamento CHECK (tipo_pagamento IN ('P','D')),
     CONSTRAINT tp_ativo5 CHECK (ativo IN ('S','N'))
 );
@@ -108,13 +104,11 @@ CREATE TABLE IF NOT EXISTS tb_pedidos_produtos(
   CONSTRAINT fk_tb_pedidos_produtos_tb_produtos
     FOREIGN KEY (fk_cod_produto)
     REFERENCES tb_produtos (cod_produto)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE,
+      ON DELETE CASCADE,
   CONSTRAINT fk_tb_pedidos_produtos_tb_pedidos1
     FOREIGN KEY (fk_cod_pedido)
     REFERENCES tb_pedidos (cod_pedido)
       ON DELETE CASCADE
-      ON UPDATE CASCADE
 );
 
 
@@ -126,21 +120,80 @@ CREATE TABLE IF NOT EXISTS tb_imagens(
     FOREIGN KEY (fk_cod_produto)
     REFERENCES tb_produtos(cod_produto)
       ON DELETE CASCADE
-      ON UPDATE CASCADE
 );
 
 
-INSERT INTO tb_usuarios VALUES (1, 'Sabrina Sandri Braga', 'sabrinateste@gmail.com', 45999353396, 15324791903, 'sabrinateste123', 'C', 'S'), (2, 'Luka Paganoti', 'lukateste@gmail.com', 45998073523, 12759755932, 'lukateste123', 'C', 'S'), (3, 'Laisa Assis', 'laisateste@gmail.com', 45998476271, 12051961964, 'laisateste123', 'C', 'S'), (4, 'Vitor Hugo', 'vitorteste@gmail.com', 45984137132, 12962616971, 'vitorteste123', 'C', 'S'), (5, 'Lucas Santos', 'lucasteste@gmail.com', 45991170168, 10416269950, 'lucasteste123', 'C', 'S');
+INSERT INTO tb_usuarios VALUES 
+(1, 'Sabrina Sandri Braga', 'sabrinateste@gmail.com', 45999353396, 15324791903, 'sabrinateste123', 'C', 'S'), 
+(2, 'Luka Paganoti', 'lukateste@gmail.com', 45998073523, 12759755932, 'lukateste123', 'C', 'S'), 
+(3, 'Laisa Assis', 'laisateste@gmail.com', 45998476271, 12051961964, 'laisateste123', 'C', 'S'), 
+(4, 'Vitor Hugo', 'vitorteste@gmail.com', 45984137132, 12962616971, 'vitorteste123', 'C', 'S'), 
+(5, 'Lucas Santos', 'lucasteste@gmail.com', 45991170168, 10416269950, 'lucasteste123', 'C', 'S');
 
-INSERT INTO tb_cidades VALUES (1, 'Cascavel', 'PR'), (2, 'Toledo', 'PR'), (3, 'Palotina', 'PR'), (4, 'Curitiba', 'PR'), (5, 'Foz do Iguaçu', 'PR');
+INSERT INTO tb_cidades VALUES 
+(1, 'Cascavel', 'PR'), 
+(2, 'Toledo', 'PR'), 
+(3, 'Palotina', 'PR'), 
+(4, 'Curitiba', 'PR'), 
+(5, 'Foz do Iguaçu', 'PR');
 
-INSERT INTO tb_enderecos VALUES (1, 'Avenida das Torres', 85806095, 429, 'Ap:202', 'S', 4, 1), (2, 'Natalício Florentino Alves', 85811420, 519, 'Casa laranja', 'S', 1, 1), (3, 'Tenente José Joaquim Firmino', 85804150, 888,'Casa azul', 'S', 2, 1), (4, 'Tranquilo Noro', 85807860, 720, 'Casa 203', 'S', 3, 1), (5, 'Jacarézinho', 85816010, 1466, 'Sobrado, acima de uma gráfica', 'S', 5, 1);
+INSERT INTO tb_enderecos VALUES 
+(1, 'Avenida das Torres', 85806095, 429, 'Ap:202', 'S', 4, 1), 
+(2, 'Natalício Florentino Alves', 85811420, 519, 'Casa laranja', 'S', 1, 1), 
+(3, 'Tenente José Joaquim Firmino', 85804150, 888,'Casa azul', 'S', 2, 1), 
+(4, 'Tranquilo Noro', 85807860, 720, 'Casa 203', 'S', 3, 1), 
+(5, 'Jacarézinho', 85816010, 1466, 'Sobrado, acima de uma gráfica', 'S', 5, 1);
 
-INSERT INTO tb_categorias VALUES (1, 'Quadros', 'S'), (2, 'Moletons', 'S'), (3, 'Pins', 'S'), (4, 'Canecas', 'S'), (5, 'Chaveiros', 'S');
+INSERT INTO tb_categorias VALUES 
+(1, 'Quadros', 'S'), 
+(2, 'Moletons', 'S'), 
+(3, 'Pins', 'S'), 
+(4, 'Canecas', 'S'), 
+(5, 'Chaveiros', 'S');
 
-INSERT INTO tb_produtos VALUES (1, 'Moletom estampa', 150.00, 20, 'Moletom com estampa 1', 'M', 'Preto', 'S', 2), (2, 'Quadro estampa', 50.00, 30, 'Quadro com estampa número 1', '40cm', 'Branco', 'S', 1), (3, 'Pins com estampa', 15.00, 40, 'Pins com estampa número 1', '4cm', 'Dourado', 'S', 3), (4, 'Caneca com estampa', 35.00, 50, 'Caneca com estampa número 1', '250ml', 'Branco', 'S', 4), (5, 'Chaveiro com estampa', 20.00, 60, 'Chaveiro com estampa número 1', '6cm', 'Dourado', 'S', 5);
+INSERT INTO tb_produtos VALUES 
+(1, 'Moletom estampa', 150.00, 20, 'Moletom com estampa 1', 'M', 'Preto', 'S', 2), 
+(2, 'Quadro estampa', 50.00, 30, 'Quadro com estampa número 1', '40cm', 'Branco', 'S', 1), 
+(3, 'Pins com estampa', 15.00, 40, 'Pins com estampa número 1', '4cm', 'Dourado', 'S', 3), 
+(4, 'Caneca com estampa', 35.00, 50, 'Caneca com estampa número 1', '250ml', 'Branco', 'S', 4), 
+(5, 'Chaveiro com estampa', 20.00, 60, 'Chaveiro com estampa número 1', '6cm', 'Dourado', 'S', 5);
 
-INSERT INTO tb_pedidos VALUES (1, 20.00, 'SD01BR', 'D', 'S', 1), (2, 15.00, 'SD02BR', 'P', 'S', 2), (3, 12.00, 'SD03BR', 'D', 'S', 3), (4, 9.00, 'SD04BR', 'P', 'S', 4), (5, 18.00, 'SD05BR', 'D', 'S', 1); 
+-- Novos inserts
+INSERT INTO tb_usuarios VALUES 
+(6, 'Isabela Oliveira', 'isabelateste@gmail.com', 45991234567, 12345678901, 'isabelateste123', 'C', 'S'),
+(7, 'Marcos Silva', 'marcosteste@gmail.com', 45999876543, 10987654321, 'marcosteste123', 'C', 'S'),
+(8, 'Camila Santos', 'camilateste@gmail.com', 45991112233, 98765432109, 'camilateste123', 'C', 'S'),
+(9, 'Ricardo Almeida', 'ricardoteste@gmail.com', 45997778888, 10293847560, 'ricardoteste123', 'C', 'S'),
+(10, 'Amanda Lima', 'amandateste@gmail.com', 45996665555, 11223344556, 'amandateste123', 'C', 'S');
+
+INSERT INTO tb_cidades VALUES 
+(6, 'Maringá', 'PR'),
+(7, 'Londrina', 'PR'),
+(8, 'Umuarama', 'PR'),
+(9, 'Pato Branco', 'PR'),
+(10, 'Guarapuava', 'PR');
+
+INSERT INTO tb_enderecos VALUES 
+(6, 'Rua Teste', 85800000, 123, 'Casa 1', 'S', 6, 6),
+(7, 'Avenida Principal', 85811111, 456, 'Apartamento 3', 'S', 7, 7),
+(8, 'Travessa da Paz', 85822222, 789, 'Casa 2', 'S', 8, 8),
+(9, 'Praça Central', 85833333, 1011, 'Sobrado 5', 'S', 9, 9),
+(10, 'Alameda dos Sonhos', 85844444, 1213, 'Casa 4', 'S', 10, 10);
+
+INSERT INTO tb_categorias VALUES 
+(6, 'Almofadas', 'S'),
+(7, 'Posters', 'S'),
+(8, 'Canetas', 'S'),
+(9, 'Bonés', 'S'),
+(10, 'Mousepads', 'S');
+
+INSERT INTO tb_produtos VALUES 
+(6, 'Almofada estampa', 40.00, 15, 'Almofada com estampa 1', '30cm', 'Azul', 'S', 6),
+(7, 'Poster estampa', 25.00, 25, 'Poster com estampa número 1', '50cm', 'Amarelo', 'S', 7),
+(8, 'Caneta com estampa', 8.00, 50, 'Caneta com estampa número 1', '0.7mm', 'Vermelho', 'S', 8),
+(9, 'Boné estampa', 30.00, 30, 'Boné com estampa número 1', 'Ajustável', 'Verde', 'S', 9),
+(10, 'Mousepad estampa', 15.00, 40, 'Mousepad com estampa número 1', '20cm x 20cm', 'Rosa', 'S', 10);
+
 
 
 
